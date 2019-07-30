@@ -5,7 +5,7 @@
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-//基礎鍵結資料
+//基礎鍵結資料(一維)
 ListLink_CS::ListLink_CS()
 //建構函式
 {
@@ -33,23 +33,7 @@ List_CS::List_CS()
 List_CS::~List_CS()
 //解構函式
 {
-	//----- Initial ...
-	int          DataCount_i = ListDataCount_i;
-	ListLink_CS  *Target_cs_pr = NULL;
-	//--------------------------------------
-
-	while (DataCount_i)
-	{
-		Target_cs_pr = Head_cs_pr;
-		Head_cs_pr = Head_cs_pr->Next_cs_pr;
-
-		delete (Target_cs_pr);
-		DataCount_i--;
-	}
-
-	ListDataCount_i = 0;
-	Head_cs_pr = NULL;
-	Tail_cs_pr = NULL;
+	FreeData_Fn();
 }
 //-----------------------------------------------------------------------------
 void List_CS::Create_Fn(int  Data_i)
@@ -145,5 +129,27 @@ int List_CS::GetListDataPosition_Fn(int  Data_i)
 	}
 
 	return (TargetPosition_i);
+}
+//-----------------------------------------------------------------------------
+void List_CS::FreeData_Fn()
+// 釋放鍵結資料
+{
+	//----- Initial ...
+	int          DataCount_i = ListDataCount_i;
+	ListLink_CS  *Target_cs_pr = NULL;
+	//--------------------------------------
+
+	while (DataCount_i)
+	{
+		Target_cs_pr = Head_cs_pr;
+		Head_cs_pr = Head_cs_pr->Next_cs_pr;
+
+		delete (Target_cs_pr);
+		DataCount_i--;
+	}
+
+	ListDataCount_i = 0;
+	Head_cs_pr = NULL;
+	Tail_cs_pr = NULL;
 }
 //-----------------------------------------------------------------------------

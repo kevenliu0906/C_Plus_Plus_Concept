@@ -21,6 +21,7 @@ public:
 	int  GetListDataCount_Fn();
 	int  GetListData_Fn(int ListDataPos_i);
 	int  GetListDataPosition_Fn(int  Data_i);
+	void FreeData_Fn();
 
 private:
 	int          ListDataCount_i;
