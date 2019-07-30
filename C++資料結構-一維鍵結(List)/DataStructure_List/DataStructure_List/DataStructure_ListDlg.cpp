@@ -184,4 +184,35 @@ void CDataStructure_ListDlg::OnBnClickedBtnDatastructureList()
 	ListDataPos_i = List_i_cs.GetListDataPosition_Fn(30);
 	Msg_cstr.Format(_T("Num:30 is in the pos:%d of the list"), ListDataPos_i);
 	MessageBox(Msg_cstr);
+
+
+	MessageBox(_T("After Delete 1,2,3,4 listdata"));
+	List_i_cs.Delete_Fn(1, 4);
+
+	ListDataCount_i = List_i_cs.GetListDataCount_Fn();
+	for (int i_i = 1; i_i <= ListDataCount_i; i_i++)
+	{
+		TempData_i = List_i_cs.GetListData_Fn(i_i);
+		Msg_cstr.Format(_T("(After Delete)TotalCount:%d, List_i_cs(%d):%d"), ListDataCount_i, i_i, TempData_i);
+		MessageBox(Msg_cstr);
+	}
+
+	ListDataPos_i = List_i_cs.GetListDataPosition_Fn(30);
+	Msg_cstr.Format(_T("(After Delete)Num:30 is in the pos:%d of the list"), ListDataPos_i);
+	MessageBox(Msg_cstr);
+
+	MessageBox(_T("After new create listdata"));
+	List_i_cs.Create_Fn(60);
+	List_i_cs.Create_Fn(80);
+	ListDataCount_i = List_i_cs.GetListDataCount_Fn();
+	for (int i_i = 1; i_i <= ListDataCount_i; i_i++)
+	{
+		TempData_i = List_i_cs.GetListData_Fn(i_i);
+		Msg_cstr.Format(_T("(After new create)TotalCount:%d, List_i_cs(%d):%d"), ListDataCount_i, i_i, TempData_i);
+		MessageBox(Msg_cstr);
+	}
+
+	ListDataPos_i = List_i_cs.GetListDataPosition_Fn(30);
+	Msg_cstr.Format(_T("(After new create)Num:30 is in the pos:%d of the list"), ListDataPos_i);
+	MessageBox(Msg_cstr);
 }

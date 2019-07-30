@@ -131,6 +131,65 @@ int List_CS::GetListDataPosition_Fn(int  Data_i)
 	return (TargetPosition_i);
 }
 //-----------------------------------------------------------------------------
+bool List_CS::Delete_Fn(int StartPosition_i, int DeleteCount_i)
+//刪除鍵結
+// StartPosition_i: 刪除的起始位置
+// DeleteCount_i: 刪除數量
+// 回傳: true(刪除成功); false(刪除失敗)
+{
+	ListLink_CS     *Target_cs_pr = NULL;
+	ListLink_CS     *Delete_cs_pr = NULL;
+	ListLink_CS     *Front_Target_cs_pr = NULL;
+
+	if (StartPosition_i < 1 || StartPosition_i > ListDataCount_i || (StartPosition_i + DeleteCount_i - 1) > ListDataCount_i)
+		return false;
+
+	for (int i_i = 1; i_i <= ListDataCount_i; i_i++)
+	{
+		if (i_i == 1)
+			Target_cs_pr = Head_cs_pr;
+		else
+		{
+			Front_Target_cs_pr = Target_cs_pr;
+			Target_cs_pr = Target_cs_pr->Next_cs_pr;
+		}
+
+		if (StartPosition_i == i_i)
+		{
+			break;
+		}
+	}
+
+	while (DeleteCount_i > 0)
+	{
+		Delete_cs_pr = Target_cs_pr;
+		Target_cs_pr = Target_cs_pr->Next_cs_pr;
+		
+		if (Delete_cs_pr == Head_cs_pr)
+		{
+			Head_cs_pr = Target_cs_pr;
+		}
+		else
+		{
+			Front_Target_cs_pr->Next_cs_pr = Target_cs_pr;
+		}
+
+		if (Target_cs_pr == NULL)  // 代表原先的Tail已經被移除
+			Tail_cs_pr = Front_Target_cs_pr;
+
+		delete(Delete_cs_pr);
+		
+		ListDataCount_i--;
+		DeleteCount_i--;
+	}
+	if (ListDataCount_i == 0)
+	{
+		Head_cs_pr = NULL;
+		Tail_cs_pr = NULL;
+	}
+	return true;
+}
+//-----------------------------------------------------------------------------
 void List_CS::FreeData_Fn()
 // 釋放鍵結資料
 {
