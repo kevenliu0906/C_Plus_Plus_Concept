@@ -85,7 +85,7 @@ void DataList_CS::Create_Fn(int  ListName_i)
 	ListCount_i++;
 }
 //-----------------------------------------------------------------------------
-void DataList_CS::AddListData_Fn(int ListPosition, int CellData_i)
+bool DataList_CS::AddListData_Fn(int ListPosition, int CellData_i)
 //加入資料
 // ListPosition_i: 指定的鍵結位置
 // CellData_i: 資料
@@ -93,7 +93,7 @@ void DataList_CS::AddListData_Fn(int ListPosition, int CellData_i)
 	DataListLink_CS    *TargetList_cs_pr = NULL;
 
 	if (ListPosition < 1 || ListPosition >ListCount_i)
-		return;
+		return false;
 
 	for (int i_i = 1; i_i <= ListPosition; i_i++)
 	{
@@ -149,7 +149,7 @@ int DataList_CS::GetListData_Fn(int ListPosition_i, int ListDataPosition_i)
 
 	ListDataCount_i = (TargetList_cs_pr->CellList_cs).GetListDataCount_Fn();
 	if (ListDataPosition_i < 1 || ListDataPosition_i > ListDataCount_i)
-		return (1);
+		return (-1);
 
 	return ((TargetList_cs_pr->CellList_cs).GetListData_Fn(ListDataPosition_i));
 }
@@ -179,14 +179,15 @@ int DataList_CS::GetListPosition_Fn(int ListName_i)
 	return (TargetListPos_i);
 }
 //-----------------------------------------------------------------------------
-void DataList_CS::FreeListData_Fn(int ListPosition_i)
+bool DataList_CS::FreeListData_Fn(int ListPosition_i)
 //移除特定位置的鍵結資料
 // ListPosition_i: 鍵結指定位置
+// 回傳: true(刪除成功); false(刪除失敗)
 {
 	DataListLink_CS   *TargetList_cs_pr = NULL;
 
 	if (ListPosition_i < 1 || ListPosition_i >ListCount_i)
-		return;
+		return false;
 	for (int i_i = 1; i_i <= ListPosition_i; i_i++)
 	{
 		if (i_i == 1)
@@ -196,6 +197,7 @@ void DataList_CS::FreeListData_Fn(int ListPosition_i)
 	}
 
 	(TargetList_cs_pr->CellList_cs).FreeData_Fn();
+	return true;
 }
 //-----------------------------------------------------------------------------
 void DataList_CS::FreeData_Fn()

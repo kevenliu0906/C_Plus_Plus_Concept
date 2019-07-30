@@ -20,13 +20,13 @@ public:
 	DataList_CS();
 	~DataList_CS();
 	void Create_Fn(int  ListName_i);
-	void AddListData_Fn(int ListPosition, int CellData_i);
+	bool AddListData_Fn(int ListPosition, int CellData_i);
 	int  GetListCount_Fn();
 	int  GetListName_Fn(int ListPosition_i);
 	int  GetListDataCount_Fn(int ListPosition_i);
 	int  GetListData_Fn(int ListPosition_i, int ListDataPosition_i);
 	int  GetListPosition_Fn(int ListName_i);
-	void FreeListData_Fn(int ListPosition_i);
+	bool FreeListData_Fn(int ListPosition_i);
 	void FreeData_Fn();
 
 protected:
