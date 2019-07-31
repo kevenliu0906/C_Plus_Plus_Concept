@@ -62,6 +62,50 @@ void List_CS::Create_Fn(int  Data_i)
 	ListDataCount_i++;
 }
 //-----------------------------------------------------------------------------
+bool List_CS::Insert_Fn(int ListDataPos_i, int Data_i)
+//插入鍵結資料
+// ListDataPos_i: 插入位置
+// Data_i: 欲插入的資料
+// 回傳: true(插入成功); false(插入失敗)
+{
+	ListLink_CS     *Target_cs_pr = NULL;
+	ListLink_CS     *Front_Target_cs_pr = NULL;
+	ListLink_CS     *NewData_cs_pr = NULL;
+
+	if (ListDataPos_i < 1 || ListDataPos_i > ListDataCount_i)
+		return false;
+
+	NewData_cs_pr = new ListLink_CS();
+	NewData_cs_pr->Content_i = Data_i;
+	NewData_cs_pr->Next_cs_pr = NULL;
+
+	for (int i_i = 1; i_i <= ListDataPos_i; i_i++)
+	{
+		if (i_i == 1)
+			Target_cs_pr = Head_cs_pr;
+		else
+		{
+			Front_Target_cs_pr = Target_cs_pr;
+			Target_cs_pr = Target_cs_pr->Next_cs_pr;
+		}
+	}
+
+	if (ListDataPos_i == 1)   //插入到陣列的第一筆
+	{
+		NewData_cs_pr->Next_cs_pr = Head_cs_pr;
+		Head_cs_pr = NewData_cs_pr;
+	}
+	else
+	{
+		NewData_cs_pr->Next_cs_pr = Target_cs_pr;
+		Front_Target_cs_pr->Next_cs_pr = NewData_cs_pr;
+	}
+
+	ListDataCount_i++;
+
+	return true;
+}
+//-----------------------------------------------------------------------------
 int List_CS::GetListDataCount_Fn()
 //獲取鍵結的總資料數目
 // 回傳: 鍵結的總資料數目
@@ -101,7 +145,7 @@ int List_CS::GetListData_Fn(int ListDataPos_i)
 		return (Target_cs_pr->Content_i);
 }
 //-----------------------------------------------------------------------------
-int List_CS::GetListDataPosition_Fn(int  Data_i)
+int List_CS::GetListDataPosition_Fn(int Data_i)
 //獲取資料在鍵結中的位置
 // Data_i: 欲獲取資料
 // 回傳: 該資料在鍵結中的位置

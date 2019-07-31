@@ -18,9 +18,10 @@ public:
 	List_CS();
 	~List_CS();
 	void Create_Fn(int  Data_i);
+	bool Insert_Fn(int  ListDataPos_i, int Data_i);
 	int  GetListDataCount_Fn();
 	int  GetListData_Fn(int ListDataPos_i);
-	int  GetListDataPosition_Fn(int  Data_i);
+	int  GetListDataPosition_Fn(int Data_i);
 	bool Delete_Fn(int StartPosition_i, int DeleteCount_i);
 	void FreeData_Fn();
 
